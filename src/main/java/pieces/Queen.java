@@ -6,8 +6,7 @@ public class Queen extends Piece {
     
     public Queen(Color color, Board board, Square square) {
         super(color, board, square);
-        if(color == Color.WHITE) setAlias("♕");
-        else setAlias("♛");
+        setAlias("QN");
     }
 
     @Override

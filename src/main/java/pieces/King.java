@@ -6,8 +6,7 @@ public class King extends Piece {
 
     public King(Color color, Board board, Square square) {
         super(color, board, square);
-        if(color == Color.WHITE) setAlias("♔");
-        else setAlias("♚");
+        setAlias("KG");
     }
     
     public void updateAvailableMoves() { 

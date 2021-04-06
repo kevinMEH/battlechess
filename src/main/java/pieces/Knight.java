@@ -6,8 +6,7 @@ public class Knight extends Piece {
     
     public Knight(Color color, Board board, Square square) {
         super(color, board, square);
-        if(color == Color.WHITE) setAlias("♘");
-        else setAlias("♞");
+        setAlias("KN");
     }
     
     public void updateAvailableMoves() {
