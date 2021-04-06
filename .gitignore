@@ -3,4 +3,4 @@ target/
 .idea/
 *.class
 .settings/
-tictactoe.iml
+battlechess.iml
