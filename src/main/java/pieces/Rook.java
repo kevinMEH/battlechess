@@ -6,7 +6,8 @@ public class Rook extends Piece {
     
     public Rook(Color color, Board board, Square square) {
         super(color, board, square);
-        setAlias("RK");
+        if(color == Color.WHITE) setAlias("♖");
+        else setAlias("♜");
     }
     
     public void updateAvailableMoves() {

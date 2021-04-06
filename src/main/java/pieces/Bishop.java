@@ -6,7 +6,8 @@ public class Bishop extends Piece {
     
     public Bishop(Color color, Board board, Square square) {
         super(color, board, square);
-        setAlias("BP");
+        if(color == Color.WHITE) setAlias("♗");
+        else setAlias("♝");
     }
     
     public void updateAvailableMoves() {

@@ -8,7 +8,8 @@ public class Pawn extends Piece {
     
     public Pawn(Color color, Board board, Square square) {
         super(color, board, square);
-        setAlias("PN");
+        if(color == Color.WHITE) setAlias("♙");
+        else setAlias("♟");
     }
     
     public void updateAvailableMoves() { // TODO: Add En Passant
