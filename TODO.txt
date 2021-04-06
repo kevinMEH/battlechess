@@ -1,0 +1,5 @@
+TODO:
+    Add en passant
+    Add castling
+    Add timer
+    Add checkmates? (Pretty easy to do)

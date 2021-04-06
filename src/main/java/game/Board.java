@@ -55,7 +55,7 @@ x   0   1   2   3   4
     private Piece blackKing;
     private Piece whiteKing;
     
-    private void spawnPieces() { // TODO: Spawn Pieces, Mini and Real
+    private void spawnPieces() {
         King whiteKing;
         King blackKing;
         switch(boardType) {
