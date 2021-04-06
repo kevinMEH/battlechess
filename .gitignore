@@ -1,0 +1,6 @@
+target/
+.vscode/
+.idea/
+*.class
+.settings/
+tictactoe.iml
