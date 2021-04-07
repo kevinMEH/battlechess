@@ -2,6 +2,7 @@ package pieces;
 
 import game.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ public abstract class Piece { // A basic piece
     private final List<Square> possibleMoves = new ArrayList<>();
     private String alias;
     private Image image;
+    private ImageView imageView;
     
     public Piece(PieceColor pieceColor, Board board, Square square) {
         this.pieceColor = pieceColor;
@@ -64,8 +66,17 @@ public abstract class Piece { // A basic piece
     public String getAlias() {return alias;}
     void setAlias(String alias) { this.alias = alias; }
     
-    public Image getImage() { return image; }
-    void setImage(String path) { image = new Image(path); }
+    public ImageView getImageView() { return imageView; }
+    void setImage(String path) { 
+        image = new Image(path);
+        imageView = new ImageView();
+        imageView.setImage(image);
+        imageView.fitHeightProperty();
+        imageView.fitWidthProperty();
+        imageView.setPreserveRatio(true);
+        imageView.setSmooth(true);
+        imageView.setCache(true);
+    }
 
     public abstract void updateAvailableMoves();
     

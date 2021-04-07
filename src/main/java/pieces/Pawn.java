@@ -9,8 +9,8 @@ public class Pawn extends Piece {
     public Pawn(PieceColor pieceColor, Board board, Square square) {
         super(pieceColor, board, square);
         setAlias("PN");
-        if(pieceColor == PieceColor.WHITE) setImage("/src/main/pictures/White Pawn.png");
-        else setImage("/src/main/pictures/Black Pawn.png");
+        if(pieceColor == PieceColor.WHITE) setImage("file:White Pawn.png");
+        else setImage("file:Black Pawn.png");
     }
     
     public void updateAvailableMoves() { // TODO: Add En Passant

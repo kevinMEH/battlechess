@@ -7,8 +7,8 @@ public class Queen extends Piece {
     public Queen(PieceColor pieceColor, Board board, Square square) {
         super(pieceColor, board, square);
         setAlias("QN");
-        if(pieceColor == PieceColor.WHITE) setImage("/src/main/pictures/White Queen.png");
-        else setImage("/src/main/pictures/Black Queen.png");
+        if(pieceColor == PieceColor.WHITE) setImage("file:White Queen.png");
+        else setImage("file:Black Queen.png");
     }
 
     @Override

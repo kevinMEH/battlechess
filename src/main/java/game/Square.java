@@ -1,12 +1,13 @@
 package game;
 
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import pieces.Piece;
 
 public class Square {
     
     private Piece piece; // Current piece on square
-    private final StackPane stackPane = new StackPane();
+    private final Pane pane = new Pane();
     private final int x;
     private final int y;
     
@@ -36,6 +37,6 @@ public class Square {
         if(piece == null) return null;
         else return piece.getColor();
     }
-    public StackPane getStackPane() { return stackPane; }
+    public Pane getPane() { return pane; }
     
 }

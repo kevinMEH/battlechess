@@ -8,6 +8,7 @@ import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
@@ -41,9 +42,9 @@ public class GameGUI extends Application {
             playGame(primaryStage);
         });
 
-        root.getChildren().addAll(regular, mini);
+        root.getChildren().addAll(regular, mini, new ImageView(new Image("file:Black Bishop.png")));
 
-        final Scene menuScene = new Scene(root);
+        final Scene menuScene = new Scene(root, 1200, 800);
         primaryStage.setTitle("battlechess");
         primaryStage.setScene(menuScene);
         primaryStage.show();
@@ -64,7 +65,7 @@ public class GameGUI extends Application {
         for(int y = 0; y < ySize; y++) { // Initial board setup, no pieces
             for(int x = 0; x < xSize; x++) {
                 // StackPane is a variable to the square in the board for easy access
-                StackPane square = game.getBoard().getSquareAt(x, y).getStackPane();
+                Pane square = game.getBoard().getSquareAt(x, y).getPane();
                 if((x + y) % 2 == 0)
                     square.setBackground(new Background(new BackgroundFill(Color.web("#fbf1c7"), CornerRadii.EMPTY, Insets.EMPTY)));
                 else
@@ -77,22 +78,25 @@ public class GameGUI extends Application {
         for(int x = 0; x < xSize; x++)
             chessBoard.getColumnConstraints().add(new ColumnConstraints(20, Control.USE_COMPUTED_SIZE, 75, Priority.ALWAYS, HPos.CENTER, true));
         for(int y = 0; y < ySize; y++)
-            chessBoard.getRowConstraints().add(new RowConstraints(20, Control.USE_COMPUTED_SIZE, 75, Priority.ALWAYS, VPos.CENTER, true));        
-        updateBoard(); // Initial update of board
+            chessBoard.getRowConstraints().add(new RowConstraints(20, Control.USE_COMPUTED_SIZE, 75, Priority.ALWAYS, VPos.CENTER, true));
+
+        // Initial update of board
+        System.out.println("Initial Update of Board");
+        updateBoard();
 
         final Scene game = new Scene(chessBoard, 1200, 800);
         primaryStage.setScene(game);
         primaryStage.show();
+        
     }
     
     public void updateBoard() {
         Board board = game.getBoard();
-
         for(int y = 0; y < board.getYSize(); y++) {
             for(int x = 0; x < board.getXSize(); x++) {
                 Square square = board.getSquareAt(x, y);
-                StackPane stackPane = square.getStackPane();
-                if(square.hasPiece()) stackPane.getChildren().add(new ImageView(square.getPiece().getImage()));
+                Pane pane = square.getPane();
+                if(square.hasPiece()) pane.getChildren().add(square.getPiece().getImageView());
             }
         }
     }

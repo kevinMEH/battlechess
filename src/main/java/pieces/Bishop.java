@@ -7,8 +7,8 @@ public class Bishop extends Piece {
     public Bishop(PieceColor pieceColor, Board board, Square square) {
         super(pieceColor, board, square);
         setAlias("BP");
-        if(pieceColor == PieceColor.WHITE) setImage("/src/main/pictures/White Bishop.png");
-        else setImage("/src/main/pictures/Black Bishop.png");
+        if(pieceColor == PieceColor.WHITE) setImage("file:White Bishop.png");
+        else setImage("file:Black Bishop.png");
     }
     
     public void updateAvailableMoves() {
