@@ -61,23 +61,24 @@ public class GameGUI extends Application {
         int xSize = game.getBoard().getXSize();
         int ySize = game.getBoard().getYSize();
         
-        for(int y = 0; y < ySize; y++) { // Initial board setup, no pieces
+        // NOTE: X and Y both start at the top left of the screen instead of the bottom left, therefore the Y has to be inverted.
+        for(int y = ySize - 1; y >= 0; y--) { // Initial board setup, no pieces
             for(int x = 0; x < xSize; x++) {
                 // StackPane is a variable to the square in the board for easy access
                 Pane square = game.getBoard().getSquareAt(x, y).getPane();
-                if((x + y) % 2 == 0)
+                if((x + ySize - 1 - y) % 2 == 0)
                     square.setBackground(new Background(new BackgroundFill(Color.web("#fbf1c7"), CornerRadii.EMPTY, Insets.EMPTY)));
                 else
                     square.setBackground(new Background(new BackgroundFill(Color.web("#8ec07c"), CornerRadii.EMPTY, Insets.EMPTY)));
-                chessBoard.add(square, x, y);
+                chessBoard.add(square, x, ySize - 1 - y);
             }
         }
 
         // Setting constraints for rows and columns
         for(int x = 0; x < xSize; x++)
-            chessBoard.getColumnConstraints().add(new ColumnConstraints(20, Control.USE_COMPUTED_SIZE, 75, Priority.ALWAYS, HPos.CENTER, true));
+            chessBoard.getColumnConstraints().add(new ColumnConstraints(20, Control.USE_COMPUTED_SIZE, 100, Priority.ALWAYS, HPos.CENTER, true));
         for(int y = 0; y < ySize; y++)
-            chessBoard.getRowConstraints().add(new RowConstraints(20, Control.USE_COMPUTED_SIZE, 75, Priority.ALWAYS, VPos.CENTER, true));
+            chessBoard.getRowConstraints().add(new RowConstraints(20, Control.USE_COMPUTED_SIZE, 100, Priority.ALWAYS, VPos.CENTER, true));
 
         // Initial update of board
         System.out.println("Initial Update of Board");
@@ -91,11 +92,16 @@ public class GameGUI extends Application {
     
     public void updateBoard() {
         Board board = game.getBoard();
+        // NOTE: X and Y both start at the top left of the screen instead of the bottom left, therefore the Y has to be inverted.
         for(int y = 0; y < board.getYSize(); y++) {
             for(int x = 0; x < board.getXSize(); x++) {
                 Square square = board.getSquareAt(x, y);
                 Pane pane = square.getPane();
-                if(square.hasPiece()) pane.getChildren().add(square.getPiece().getImageView());
+                if(square.hasPiece()) {
+                    ImageView imageView = square.getPiece().getImageView();
+                    imageView.resize(pane.getWidth(), pane.getHeight());
+                    pane.getChildren().add(imageView);
+                }
             }
         }
     }

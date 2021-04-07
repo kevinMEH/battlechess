@@ -71,8 +71,6 @@ public abstract class Piece { // A basic piece
         image = new Image(path);
         imageView = new ImageView();
         imageView.setImage(image);
-//        imageView.fitHeightProperty();
-//        imageView.fitWidthProperty();
         imageView.setPreserveRatio(true);
         imageView.setSmooth(true);
         imageView.setCache(true);
