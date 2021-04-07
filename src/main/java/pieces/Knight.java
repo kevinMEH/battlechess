@@ -7,8 +7,8 @@ public class Knight extends Piece {
     public Knight(PieceColor pieceColor, Board board, Square square) {
         super(pieceColor, board, square);
         setAlias("KN");
-        if(pieceColor == PieceColor.WHITE) setImage("file:White Knight.png");
-        else setImage("file:Black Knight.png");
+        if(pieceColor == PieceColor.WHITE) setImage("https://raw.githubusercontent.com/kevinMEH/battlechess/gui/src/main/java/pieces/White%20Knight.png");
+        else setImage("https://raw.githubusercontent.com/kevinMEH/battlechess/gui/src/main/java/pieces/Black%20Knight.png");
     }
     
     public void updateAvailableMoves() {

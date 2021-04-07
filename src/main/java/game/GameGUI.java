@@ -42,8 +42,7 @@ public class GameGUI extends Application {
             playGame(primaryStage);
         });
 
-        root.getChildren().addAll(regular, mini, new ImageView(new Image("file:Black Bishop.png")));
-
+        root.getChildren().addAll(regular, mini);
         final Scene menuScene = new Scene(root, 1200, 800);
         primaryStage.setTitle("battlechess");
         primaryStage.setScene(menuScene);

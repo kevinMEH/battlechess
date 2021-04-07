@@ -9,8 +9,8 @@ public class Pawn extends Piece {
     public Pawn(PieceColor pieceColor, Board board, Square square) {
         super(pieceColor, board, square);
         setAlias("PN");
-        if(pieceColor == PieceColor.WHITE) setImage("file:White Pawn.png");
-        else setImage("file:Black Pawn.png");
+        if(pieceColor == PieceColor.WHITE) setImage("https://raw.githubusercontent.com/kevinMEH/battlechess/gui/src/main/java/pieces/White%20Pawn.png");
+        else setImage("https://raw.githubusercontent.com/kevinMEH/battlechess/gui/src/main/java/pieces/Black%20Pawn.png");
     }
     
     public void updateAvailableMoves() { // TODO: Add En Passant
