@@ -7,49 +7,41 @@ import java.util.Scanner;
 
 public class Game {
     
-    private final Board board;
+    private Board board;
     
-    Game() {
-        Scanner scanner = new Scanner(System.in);
-        while(true) {
-            System.out.println("Real Chess or Mini Chess?");
-            System.out.println("Regular | Mini");
-            String response = scanner.nextLine();
-            if(response.equalsIgnoreCase("regular")) {
-                board = new Board(8, 8, Board.BoardType.REGULAR);
+    Game(Board.BoardType boardType) {
+        switch(boardType) {
+            case REGULAR:
+                board = new Board(8, 8, boardType);
                 break;
-            } else if(response.equalsIgnoreCase("mini")) {
-                board = new Board(5, 6, Board.BoardType.MINI);
+            case MINI:
+                board = new Board(5, 6, boardType);
                 break;
-            } else {
-                System.out.println("Error: Input not recognized! Try again.");
-            }
         }
-        startGame();
     }
     
     public void startGame() {
         while(true) {
             board.calculateMoves();
-            playerMove(Color.WHITE);
+            playerMove(PieceColor.WHITE);
             if(checkWin()) break;
             board.calculateMoves();
-            playerMove(Color.BLACK);
+            playerMove(PieceColor.BLACK);
             if(checkWin()) break;
         }
         endGame();
     }
     
-    void playerMove(Color color) {
+    void playerMove(PieceColor pieceColor) {
         while(true) {
             printBoard();
-            System.out.println("It's " + color.name() + "'s turn to move!");
+            System.out.println("It's " + pieceColor.name() + "'s turn to move!");
             System.out.println("What piece would you like to move? Please give the coordinates.");
             System.out.println("Example coordinates: 0:4 (x:y)");
             Scanner scanner = new Scanner(System.in);
             String response = scanner.nextLine();
             
-            Piece targetPiece = checkCoordinates(response, color);
+            Piece targetPiece = checkCoordinates(response, pieceColor);
             if(targetPiece == null) continue;
             
             System.out.println("Where would you like to go? Please give the coordinates.");
@@ -74,7 +66,7 @@ public class Game {
                 if((x + y) % 2 == 0) print = GRAY + " ";
                 else print = " ";
                 if(square.hasPiece()) {
-                    if(square.getPieceColor() == Color.BLACK) print = print + BLUE_TEXT;
+                    if(square.getPieceColor() == PieceColor.BLACK) print = print + BLUE_TEXT;
                     print = print + square.getPiece().getAlias() + " " + RESET;
                 }
                 else print = print + "   " + RESET;
@@ -85,7 +77,7 @@ public class Game {
         System.out.println("   0   1   2   3   4   5   6   7");
     }
     
-    Piece checkCoordinates(String response, Color color) {
+    Piece checkCoordinates(String response, PieceColor pieceColor) {
         if(!correctFormat(response)) {
             System.out.println("Incorrect format! Try again.");
             return null;
@@ -102,7 +94,7 @@ public class Game {
             System.out.println("There is no piece at the specified location! Try again.");
             return null;
         }
-        if(targetPiece.getColor() != color) {
+        if(targetPiece.getColor() != pieceColor) {
             System.out.println("This piece does not belong to you! Try again.");
             return null;
         }
@@ -152,12 +144,12 @@ public class Game {
         return board.inBounds(coordinates[0], coordinates[1]);
     }
     
-    Color winnerColor() {
+    PieceColor winnerColor() {
         List<Piece> pieces = board.getPieces();
         if(!pieces.contains(board.getBlackKing())) // Does not contain black king
-            return Color.WHITE;
+            return PieceColor.WHITE;
         if(!pieces.contains(board.getWhiteKing())) // Does not contain white king
-            return Color.BLACK;
+            return PieceColor.BLACK;
         return null;
     }
     
@@ -173,5 +165,7 @@ public class Game {
                 break;
         }
     }
+    
+    public Board getBoard() { return board; }
 
 }

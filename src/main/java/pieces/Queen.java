@@ -4,9 +4,11 @@ import game.*;
 
 public class Queen extends Piece {
     
-    public Queen(Color color, Board board, Square square) {
-        super(color, board, square);
+    public Queen(PieceColor pieceColor, Board board, Square square) {
+        super(pieceColor, board, square);
         setAlias("QN");
+        if(pieceColor == PieceColor.WHITE) setImage("/src/main/pictures/White Queen.png");
+        else setImage("/src/main/pictures/Black Queen.png");
     }
 
     @Override

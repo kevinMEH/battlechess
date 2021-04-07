@@ -4,9 +4,11 @@ import game.*;
 
 public class Knight extends Piece {
     
-    public Knight(Color color, Board board, Square square) {
-        super(color, board, square);
+    public Knight(PieceColor pieceColor, Board board, Square square) {
+        super(pieceColor, board, square);
         setAlias("KN");
+        if(pieceColor == PieceColor.WHITE) setImage("/src/main/pictures/White Knight.png");
+        else setImage("/src/main/pictures/Black Knight.png");
     }
     
     public void updateAvailableMoves() {

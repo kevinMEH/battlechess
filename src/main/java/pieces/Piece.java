@@ -1,21 +1,23 @@
 package pieces;
 
 import game.*;
+import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Piece { // A basic piece
     
-    private final Color color;
+    private final PieceColor pieceColor;
     private boolean killed = false;
     private Square square;
     final Board board;
     private final List<Square> possibleMoves = new ArrayList<>();
     private String alias;
+    private Image image;
     
-    public Piece(Color color, Board board, Square square) {
-        this.color = color;
+    public Piece(PieceColor pieceColor, Board board, Square square) {
+        this.pieceColor = pieceColor;
         this.board = board;
         this.square = square;
         square.capture(this);
@@ -40,7 +42,7 @@ public abstract class Piece { // A basic piece
 
     boolean validMove(int x, int y) {
         if(!board.inBounds(x, y)) return false;
-        return board.getSquareAt(x, y).getPieceColor() != color;
+        return board.getSquareAt(x, y).getPieceColor() != pieceColor;
     }
     
     public Square getSquare() {return square;}
@@ -50,7 +52,7 @@ public abstract class Piece { // A basic piece
     void addMove(Square square) { possibleMoves.add(square); }
     public void resetMoves() { possibleMoves.clear(); }
     
-    public Color getColor() { return color; }
+    public PieceColor getColor() { return pieceColor; }
     
     public void kill() { 
         this.killed = true; 
@@ -61,6 +63,9 @@ public abstract class Piece { // A basic piece
     
     public String getAlias() {return alias;}
     void setAlias(String alias) { this.alias = alias; }
+    
+    public Image getImage() { return image; }
+    void setImage(String path) { image = new Image(path); }
 
     public abstract void updateAvailableMoves();
     

@@ -4,9 +4,11 @@ import game.*;
 
 public class King extends Piece {
 
-    public King(Color color, Board board, Square square) {
-        super(color, board, square);
+    public King(PieceColor pieceColor, Board board, Square square) {
+        super(pieceColor, board, square);
         setAlias("KG");
+        if(pieceColor == PieceColor.WHITE) setImage("/src/main/pictures/White King.png");
+        else setImage("/src/main/pictures/Black King.png");
     }
     
     public void updateAvailableMoves() { 

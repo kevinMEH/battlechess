@@ -6,9 +6,11 @@ public class Pawn extends Piece {
     
     private boolean firstMove = true;
     
-    public Pawn(Color color, Board board, Square square) {
-        super(color, board, square);
+    public Pawn(PieceColor pieceColor, Board board, Square square) {
+        super(pieceColor, board, square);
         setAlias("PN");
+        if(pieceColor == PieceColor.WHITE) setImage("/src/main/pictures/White Pawn.png");
+        else setImage("/src/main/pictures/Black Pawn.png");
     }
     
     public void updateAvailableMoves() { // TODO: Add En Passant

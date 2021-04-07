@@ -4,9 +4,11 @@ import game.*;
 
 public class Rook extends Piece {
     
-    public Rook(Color color, Board board, Square square) {
-        super(color, board, square);
+    public Rook(PieceColor pieceColor, Board board, Square square) {
+        super(pieceColor, board, square);
         setAlias("RK");
+        if(pieceColor == PieceColor.WHITE) setImage("/src/main/pictures/White Rook.png");
+        else setImage("/src/main/pictures/Black Rook.png");
     }
     
     public void updateAvailableMoves() {

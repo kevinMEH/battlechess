@@ -1,10 +1,12 @@
 package game;
 
+import javafx.scene.layout.StackPane;
 import pieces.Piece;
 
 public class Square {
     
     private Piece piece; // Current piece on square
+    private final StackPane stackPane = new StackPane();
     private final int x;
     private final int y;
     
@@ -30,9 +32,10 @@ public class Square {
     public int getY() {return y;}
     public Piece getPiece() {return piece;}
     public void removePiece() {piece = null;}
-    public Color getPieceColor() {
+    public PieceColor getPieceColor() {
         if(piece == null) return null;
         else return piece.getColor();
     }
+    public StackPane getStackPane() { return stackPane; }
     
 }
