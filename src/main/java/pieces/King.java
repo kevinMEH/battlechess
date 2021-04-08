@@ -9,8 +9,8 @@ public class King extends Piece {
 
     public King(PieceColor pieceColor, Board board, Square square) {
         super(pieceColor, board, square);
-        if(pieceColor == PieceColor.WHITE) setImage("https://raw.githubusercontent.com/kevinMEH/battlechess/gui/src/main/java/pieces/White%20King.png");
-        else setImage("https://raw.githubusercontent.com/kevinMEH/battlechess/gui/src/main/java/pieces/Black%20King.png");
+        if(pieceColor == PieceColor.WHITE) setImage("https://raw.githubusercontent.com/kevinMEH/battlechess/main/src/main/java/pieces/White%20King.png");
+        else setImage("https://raw.githubusercontent.com/kevinMEH/battlechess/main/src/main/java/pieces/Black%20King.png");
     }
     
     public void updateAvailableMoves() { 

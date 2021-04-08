@@ -6,8 +6,8 @@ public class Queen extends Piece {
     
     public Queen(PieceColor pieceColor, Board board, Square square) {
         super(pieceColor, board, square);
-        if(pieceColor == PieceColor.WHITE) setImage("https://raw.githubusercontent.com/kevinMEH/battlechess/gui/src/main/java/pieces/White%20Queen.png");
-        else setImage("https://raw.githubusercontent.com/kevinMEH/battlechess/gui/src/main/java/pieces/Black%20Queen.png");
+        if(pieceColor == PieceColor.WHITE) setImage("https://raw.githubusercontent.com/kevinMEH/battlechess/main/src/main/java/pieces/White%20Queen.png");
+        else setImage("https://raw.githubusercontent.com/kevinMEH/battlechess/main/src/main/java/pieces/Black%20Queen.png");
     }
 
     @Override

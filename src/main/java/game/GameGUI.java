@@ -77,8 +77,9 @@ public class GameGUI extends Application {
                 int currentY = y;
                 pane.setOnMouseClicked(mouseEvent -> { //
                     
-                    System.out.println("Clicked square " + currentX + ", " + currentY);
                     
+                    
+                    System.out.println("Clicked square " + currentX + ", " + currentY);
                     Square square = game.getBoard().getSquareAt(currentX, currentY);
                     if(square.hasPiece()) {
                         System.out.println("Square has piece"); // DEBUGGING REMOVE THIS
@@ -92,6 +93,7 @@ public class GameGUI extends Application {
                                         + " at " + targetPiece.getSquare().getX() + ", " + targetPiece.getSquare().getY());
                                 selectPiece(targetPiece);
                             }
+                            
                         } else { // We have already selected a piece
                             System.out.println("Already selected a piece"); // DEBUGGING REMOVE THIS
                             if(targetPiece.getColor() == currentPlayer) { // If the color is the same, reselect to the other piece
@@ -118,9 +120,13 @@ public class GameGUI extends Application {
                             System.out.println("Player moved piece " + currentSelectedPiece.getColor() 
                                     + " to " + currentX + ", " + currentY);
                             nextTurn();
+                        } else if(currentSelectedPiece != null) {
+                            selectPiece(null);
                         }
                     }
         
+                    
+                    
                 });
                 
                 game.getBoard().getSquareAt(x, y).setPane(pane);
@@ -145,9 +151,18 @@ public class GameGUI extends Application {
         
     }
     
-//    ImageView blackDot = new ImageView(new Image())
-    {
-        
+    Image blackDot = new Image("https://raw.githubusercontent.com/kevinMEH/battlechess/main/src/main/java/game/black%20dot.png");
+    String blackDotId = "Black Dot";
+    private void addPropertiesToImageView(ImageView imageView) {
+        imageView.setPreserveRatio(true);
+        imageView.setSmooth(true);
+        imageView.setCache(true);
+    }
+    
+    String greenPaneID = "Green Pane";
+    private void addPropertiesToGreenPane(Pane greenPane) {
+        greenPane.setBackground(new Background(new BackgroundFill(Color.web("#b8bb26"), CornerRadii.EMPTY, Insets.EMPTY)));
+        greenPane.setPrefSize(100, 100);
     }
     
     void selectPiece(Piece targetPiece) { // Highlights all possible moves
@@ -156,18 +171,36 @@ public class GameGUI extends Application {
         if(targetPiece != null) {
             List<Square> moveSet = targetPiece.getPossibleMoves();
             for (Square move : moveSet) {
-                if (move.hasPiece()) {
-//                    move.getPane().setBackground();
+                if (move.hasPiece()) { // If square has piece add green pane
+                    System.out.println("Added green pane to " + move.getX() + ", " + move.getY());
+                    // JavaFX automatically removes children that are added to multiple nodes, therefore, we need to create a new node each time.
+                    Pane tempGreenPane = new Pane();
+                    addPropertiesToGreenPane(tempGreenPane);
+                    tempGreenPane.setId(greenPaneID);
+                    move.getPane().getChildren().add(move.getPane().getChildren().size() - 1, tempGreenPane);
+                } else { // Else put black dot
+                    System.out.println("Added black dot to " + move.getX() + ", " + move.getY());
+                    // JavaFX automatically removes children that are added to multiple nodes, therefore, we need to create a new node each time.
+                    ImageView tempDot = new ImageView(blackDot);
+                    addPropertiesToImageView(tempDot);
+                    tempDot.setId(blackDotId);
+                    move.getPane().getChildren().add(tempDot);
                 }
             }
         }
     }
     
     void resetMoveUI() { // Resets the UI of the available moves based on the current piece
-        List<Square> moveSet = currentSelectedPiece.getPossibleMoves();
-        for(Square move : moveSet) {
-            if(move.hasPiece()) {
-//                move.getPane()
+        if(currentSelectedPiece != null) {
+            List<Square> moveSet = currentSelectedPiece.getPossibleMoves();
+            for (Square move : moveSet) {
+                if (move.hasPiece()) { // If square has piece remove green pane
+                    // Removes based on ID
+                    move.getPane().getChildren().remove(move.getPane().lookup(greenPaneID));
+                } else { // Else remove black dot
+                    // Removes based on ID
+                    move.getPane().getChildren().remove(move.getPane().lookup(blackDotId));
+                }
             }
         }
     }
@@ -182,7 +215,6 @@ public class GameGUI extends Application {
                 pane.getChildren().clear(); // Clears children 
                 if(square.hasPiece()) { // If it has a piece displays it
                     ImageView imageView = square.getPiece().getImageView();
-                    imageView.resize(pane.getWidth(), pane.getHeight());
                     pane.getChildren().add(imageView);
                 }
             }
