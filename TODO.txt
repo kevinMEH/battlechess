@@ -3,4 +3,12 @@ TODO:
     Add castling
     Add timer
     Add checkmates? (Pretty easy to do)
-    GUI GUI GUI GUI GUI GUI!!!!
+    Add pawn promotion
+    Move indicators
+    End Screen
+    Add sound
+    
+TODO: Battle Chess
+    Add alternate attack
+    Add animation
+    

@@ -8,11 +8,14 @@ import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.scene.paint.Color;
 import pieces.Piece;
+
+import java.util.List;
 
 public class GameGUI extends Application {
     
@@ -87,7 +90,7 @@ public class GameGUI extends Application {
                                 // If the piece belongs to the player
                                 System.out.println("Player " + currentPlayer.name() + " selected " + targetPiece.getClass() 
                                         + " at " + targetPiece.getSquare().getX() + ", " + targetPiece.getSquare().getY());
-                                currentSelectedPiece = targetPiece;
+                                selectPiece(targetPiece);
                             }
                         } else { // We have already selected a piece
                             System.out.println("Already selected a piece"); // DEBUGGING REMOVE THIS
@@ -95,7 +98,7 @@ public class GameGUI extends Application {
                                 System.out.println("Same color"); // DEBUGGING REMOVE THIS
                                 System.out.println("Player " + currentPlayer.name() + " selected " + targetPiece.getClass()
                                         + " at " + targetPiece.getSquare().getX() + ", " + targetPiece.getSquare().getY());
-                                currentSelectedPiece = targetPiece;
+                                selectPiece(targetPiece);
                             } else { // If color is different
                                 System.out.println("Different color"); // DEBUGGING REMOVE THIS
                                 if(currentSelectedPiece.getPossibleMoves().contains(targetPiece.getSquare())) {
@@ -142,6 +145,33 @@ public class GameGUI extends Application {
         
     }
     
+//    ImageView blackDot = new ImageView(new Image())
+    {
+        
+    }
+    
+    void selectPiece(Piece targetPiece) { // Highlights all possible moves
+        resetMoveUI();
+        currentSelectedPiece = targetPiece;
+        if(targetPiece != null) {
+            List<Square> moveSet = targetPiece.getPossibleMoves();
+            for (Square move : moveSet) {
+                if (move.hasPiece()) {
+//                    move.getPane().setBackground();
+                }
+            }
+        }
+    }
+    
+    void resetMoveUI() { // Resets the UI of the available moves based on the current piece
+        List<Square> moveSet = currentSelectedPiece.getPossibleMoves();
+        for(Square move : moveSet) {
+            if(move.hasPiece()) {
+//                move.getPane()
+            }
+        }
+    }
+    
     public void updateBoard() {
         Board board = game.getBoard();
         // NOTE: X and Y both start at the top left of the screen instead of the bottom left, therefore the Y has to be inverted.
@@ -160,6 +190,7 @@ public class GameGUI extends Application {
     }
     
     void nextTurn() {
+        selectPiece(null);
         game.getBoard().updateMoves();
         updateBoard();
         switch(currentPlayer) {
@@ -168,7 +199,6 @@ public class GameGUI extends Application {
             case BLACK: currentPlayer = PieceColor.WHITE;
                 break;
         }
-        currentSelectedPiece = null;
         if(game.checkWin()) endScreen();
     }
     
