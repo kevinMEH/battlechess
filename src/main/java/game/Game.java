@@ -22,10 +22,10 @@ public class Game {
     
     public void startGame() {
         while(true) {
-            board.calculateMoves();
+            board.updateMoves();
             playerMove(PieceColor.WHITE);
             if(checkWin()) break;
-            board.calculateMoves();
+            board.updateMoves();
             playerMove(PieceColor.BLACK);
             if(checkWin()) break;
         }
@@ -153,7 +153,7 @@ public class Game {
         return null;
     }
     
-    boolean checkWin() { return winnerColor() != null; }
+    public boolean checkWin() { return winnerColor() != null; }
     
     private void endGame() {
         switch (winnerColor()) {

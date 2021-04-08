@@ -8,11 +8,11 @@ import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.scene.paint.Color;
+import pieces.Piece;
 
 import java.io.IOException;
 
@@ -52,6 +52,9 @@ public class GameGUI extends Application {
     GridPane chessBoard;
     Game game;
     
+    Piece currentSelectedPiece; // The current selected piece
+    PieceColor currentPlayer = PieceColor.WHITE;
+    
     void playGame(Stage primaryStage) { // Chess board and game
         chessBoard = new GridPane();
         chessBoard.setBackground(new Background(new BackgroundFill(Color.web("fdf6e3"), CornerRadii.EMPTY, Insets.EMPTY)));
@@ -65,12 +68,64 @@ public class GameGUI extends Application {
         for(int y = ySize - 1; y >= 0; y--) { // Initial board setup, no pieces
             for(int x = 0; x < xSize; x++) {
                 // StackPane is a variable to the square in the board for easy access
-                Pane square = game.getBoard().getSquareAt(x, y).getPane();
+                Pane pane = new Pane();
                 if((x + ySize - 1 - y) % 2 == 0)
-                    square.setBackground(new Background(new BackgroundFill(Color.web("#fbf1c7"), CornerRadii.EMPTY, Insets.EMPTY)));
+                    pane.setBackground(new Background(new BackgroundFill(Color.web("#fbf1c7"), CornerRadii.EMPTY, Insets.EMPTY)));
                 else
-                    square.setBackground(new Background(new BackgroundFill(Color.web("#8ec07c"), CornerRadii.EMPTY, Insets.EMPTY)));
-                chessBoard.add(square, x, ySize - 1 - y);
+                    pane.setBackground(new Background(new BackgroundFill(Color.web("#8ec07c"), CornerRadii.EMPTY, Insets.EMPTY)));
+                
+                int currentX = x; // Or else the lambda will use the variable x and y of the for statement, which is dynamic.
+                int currentY = y;
+                pane.setOnMouseClicked(mouseEvent -> { //
+                    
+                    System.out.println("Clicked square " + currentX + ", " + currentY);
+                    
+                    Square square = game.getBoard().getSquareAt(currentX, currentY);
+                    if(square.hasPiece()) {
+                        System.out.println("Square has piece"); // DEBUGGING REMOVE THIS
+                        Piece targetPiece = square.getPiece();
+                        
+                        if(currentSelectedPiece == null) { // If we have not selected a piece, select it
+                            System.out.println("No selected piece"); // DEBUGGING REMOVE THIS
+                            if(targetPiece.getColor() == currentPlayer) { 
+                                // If the piece belongs to the player
+                                System.out.println("Player " + currentPlayer.name() + " selected " + targetPiece.getClass() 
+                                        + " at " + targetPiece.getSquare().getX() + ", " + targetPiece.getSquare().getY());
+                                currentSelectedPiece = targetPiece;
+                            }
+                        } else { // We have already selected a piece
+                            System.out.println("Already selected a piece"); // DEBUGGING REMOVE THIS
+                            if(targetPiece.getColor() == currentPlayer) { // If the color is the same, reselect to the other piece
+                                System.out.println("Same color"); // DEBUGGING REMOVE THIS
+                                System.out.println("Player " + currentPlayer.name() + " selected " + targetPiece.getClass()
+                                        + " at " + targetPiece.getSquare().getX() + ", " + targetPiece.getSquare().getY());
+                                currentSelectedPiece = targetPiece;
+                            } else { // If color is different
+                                System.out.println("Different color"); // DEBUGGING REMOVE THIS
+                                if(currentSelectedPiece.getPossibleMoves().contains(targetPiece.getSquare())) {
+                                    // If move is possible
+                                    currentSelectedPiece.move(currentX, currentY);
+                                    System.out.println("Player moved piece " + currentSelectedPiece.getColor() 
+                                            + " to " + currentX + ", " + currentY);
+                                    nextTurn();
+                                }
+                            }
+                        }
+                    } else { // If square does not have a piece
+                        System.out.println("Square does not have a piece"); // DEBUGGING REMOVE THIS
+                        if(currentSelectedPiece != null 
+                                && currentSelectedPiece.getPossibleMoves().contains(square)) { // If valid move, move to that square
+                            currentSelectedPiece.move(currentX, currentY);
+                            System.out.println("Player moved piece " + currentSelectedPiece.getColor() 
+                                    + " to " + currentX + ", " + currentY);
+                            nextTurn();
+                        }
+                    }
+        
+                });
+                
+                game.getBoard().getSquareAt(x, y).setPane(pane);
+                chessBoard.add(pane, x, ySize - 1 - y);
             }
         }
 
@@ -83,6 +138,7 @@ public class GameGUI extends Application {
         // Initial update of board
         System.out.println("Initial Update of Board");
         updateBoard();
+        game.getBoard().updateMoves();
 
         final Scene game = new Scene(chessBoard, 1200, 800);
         primaryStage.setScene(game);
@@ -97,12 +153,30 @@ public class GameGUI extends Application {
             for(int x = 0; x < board.getXSize(); x++) {
                 Square square = board.getSquareAt(x, y);
                 Pane pane = square.getPane();
-                if(square.hasPiece()) {
+                pane.getChildren().clear(); // Clears children 
+                if(square.hasPiece()) { // If it has a piece displays it
                     ImageView imageView = square.getPiece().getImageView();
                     imageView.resize(pane.getWidth(), pane.getHeight());
                     pane.getChildren().add(imageView);
                 }
             }
         }
+    }
+    
+    void nextTurn() {
+        game.getBoard().updateMoves();
+        updateBoard();
+        switch(currentPlayer) {
+            case WHITE: currentPlayer = PieceColor.BLACK;
+                break;
+            case BLACK: currentPlayer = PieceColor.WHITE;
+                break;
+        }
+        currentSelectedPiece = null;
+        if(game.checkWin()) endScreen();
+    }
+    
+    void endScreen() { // End screen
+        
     }
 }

@@ -111,7 +111,7 @@ x   0   1   2   3   4
                 pieces.add(new Rook(PieceColor.WHITE, this, getSquareAt(0, 0)));
                 pieces.add(new Queen(PieceColor.WHITE, this, getSquareAt(1, 0)));
                 pieces.add(whiteKing);
-                pieces.add(new King(PieceColor.WHITE, this, getSquareAt(3, 0)));
+                pieces.add(new Knight(PieceColor.WHITE, this, getSquareAt(3, 0)));
                 pieces.add(new Rook(PieceColor.WHITE, this, getSquareAt(4, 0)));
                 
                 pieces.add(new Pawn(PieceColor.WHITE, this, getSquareAt(0, 1)));
@@ -123,7 +123,7 @@ x   0   1   2   3   4
                 pieces.add(new Rook(PieceColor.BLACK, this, getSquareAt(0, 5)));
                 pieces.add(new Queen(PieceColor.BLACK, this, getSquareAt(1, 5)));
                 pieces.add(blackKing);
-                pieces.add(new King(PieceColor.BLACK, this, getSquareAt(3, 5)));
+                pieces.add(new Knight(PieceColor.BLACK, this, getSquareAt(3, 5)));
                 pieces.add(new Rook(PieceColor.BLACK, this, getSquareAt(4, 5)));
 
                 pieces.add(new Pawn(PieceColor.BLACK, this, getSquareAt(0, 4)));
@@ -148,7 +148,7 @@ x   0   1   2   3   4
         deadPieces.add(piece);
     }
     
-    void calculateMoves() {
+    void updateMoves() {
         for(Piece piece : pieces) {
             piece.resetMoves();
             piece.updateAvailableMoves();

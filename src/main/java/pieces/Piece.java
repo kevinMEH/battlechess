@@ -15,7 +15,6 @@ public abstract class Piece { // A basic piece
     final Board board;
     private final List<Square> possibleMoves = new ArrayList<>();
     private String alias;
-    private Image image;
     private ImageView imageView;
     
     public Piece(PieceColor pieceColor, Board board, Square square) {
@@ -27,11 +26,9 @@ public abstract class Piece { // A basic piece
     
     public void move(int x, int y) {
         Square targetSquare = board.getSquareAt(x, y);
-        if(getPossibleMoves().contains(targetSquare)) {
-            this.getSquare().removePiece();
-            targetSquare.capture(this);
-            this.setSquare(targetSquare);
-        }
+        this.getSquare().removePiece();
+        targetSquare.capture(this);
+        this.setSquare(targetSquare);
     }
     
     public void move(Integer[] coordinates) {
@@ -67,8 +64,8 @@ public abstract class Piece { // A basic piece
     void setAlias(String alias) { this.alias = alias; }
     
     public ImageView getImageView() { return imageView; }
-    void setImage(String path) { 
-        image = new Image(path);
+    void setImage(String path) {
+        Image image = new Image(path);
         imageView = new ImageView();
         imageView.setImage(image);
         imageView.setPreserveRatio(true);
