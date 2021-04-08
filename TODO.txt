@@ -4,9 +4,9 @@ TODO:
     Add timer
     Add checkmates? (Pretty easy to do)
     Add pawn promotion
-    Move indicators
     End Screen
     Add sound
+    Highlight last move
     
 TODO: Battle Chess
     Add alternate attack

@@ -14,9 +14,8 @@ public class King extends Piece {
     }
     
     public void updateAvailableMoves() { 
-        // TODO: Check for checkmates before moving. 
-        // Or not actually to make game more intense. 
-        // Add timer if not doing this.
+        // TODO: Add Checkmates
+        
         int x = this.getSquare().getX();
         int y = this.getSquare().getY();
         
@@ -75,6 +74,22 @@ public class King extends Piece {
         if(board.inBounds(x + 1, y - 1)) result.add(board.getSquareAt(x + 1, y - 1));
         
         return result;
+    }
+    
+    public boolean inCheck() {
+        switch(getColor()) {
+            case WHITE:
+                for(Piece piece : board.getPieces()) {
+                    if(piece.getColor() == PieceColor.BLACK)
+                        if(piece.getPossibleMoves().contains(getSquare())) return true;
+                }
+            case BLACK:
+                for(Piece piece : board.getPieces()) {
+                    if(piece.getColor() == PieceColor.WHITE)
+                        if(piece.getPossibleMoves().contains(getSquare())) return true;
+                }
+        }
+        return false;
     }
     
 }

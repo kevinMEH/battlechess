@@ -14,6 +14,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.scene.paint.Color;
 import pieces.Piece;
+import pieces.King;
 
 import java.util.List;
 
@@ -160,22 +161,30 @@ public class GameGUI extends Application {
     }
     
     String greenPaneID = "GreenPane";
-    private void addPropertiesToGreenPane(Pane greenPane) {
-        greenPane.setBackground(new Background(new BackgroundFill(Color.web("#b8bb26"), CornerRadii.EMPTY, Insets.EMPTY)));
-        greenPane.setPrefSize(100, 100);
+    private void addPropertiesToPane(Pane pane, String hex) {
+        pane.setBackground(new Background(new BackgroundFill(Color.web(hex), CornerRadii.EMPTY, Insets.EMPTY)));
+        pane.setPrefSize(100, 100);
+    }
+
+    Pane bluePane = new Pane();
+    {
+        addPropertiesToPane(bluePane, "#458588");
     }
     
     void selectPiece(Piece targetPiece) { // Highlights all possible moves
         resetMoveUI();
         currentSelectedPiece = targetPiece;
         if(targetPiece != null) {
+            // Highlights
+            currentSelectedPiece.getSquare().getPane().getChildren().add(currentSelectedPiece.getSquare().getPane().getChildren().size() - 1, bluePane);
+            
             List<Square> moveSet = targetPiece.getPossibleMoves();
             for (Square move : moveSet) {
                 if (move.hasPiece()) { // If square has piece add green pane
                     System.out.println("Added green pane to " + move.getX() + ", " + move.getY());
                     // JavaFX automatically removes children that are added to multiple nodes, therefore, we need to create a new node each time.
                     Pane tempGreenPane = new Pane();
-                    addPropertiesToGreenPane(tempGreenPane);
+                    addPropertiesToPane(tempGreenPane, "#b8bb26");
                     tempGreenPane.setId(greenPaneID);
                     move.getPane().getChildren().add(move.getPane().getChildren().size() - 1, tempGreenPane);
                 } else { // Else put black dot
@@ -192,14 +201,15 @@ public class GameGUI extends Application {
     
     void resetMoveUI() { // Resets the UI of the available moves based on the current piece
         if(currentSelectedPiece != null) {
+            currentSelectedPiece.getSquare().getPane().getChildren().remove(bluePane);
             List<Square> moveSet = currentSelectedPiece.getPossibleMoves();
             for (Square move : moveSet) {
                 if (move.hasPiece()) { // If square has piece remove green pane
-                    // Removes based on ID
+                    // Removes based on ID. Add a # in front because it is a CSS selector.
                     System.out.println("Removing Green Pane");
                     move.getPane().getChildren().removeAll(move.getPane().lookupAll("#" + greenPaneID));
                 } else { // Else remove black dot
-                    // Removes based on ID
+                    // Removes based on ID. Add a # in front because it is a CSS selector.
                     System.out.println("Removing Black Dot");
                     move.getPane().getChildren().removeAll(move.getPane().lookupAll("#" + blackDotId));
                 }
@@ -220,6 +230,19 @@ public class GameGUI extends Application {
                     pane.getChildren().add(imageView);
                 }
             }
+        }
+        // Checks if the king is in check, if yes puts a red square.
+        if(((King) board.getWhiteKing()).inCheck()) {
+            System.out.println("White King in check");
+            Pane redPane = new Pane();
+            addPropertiesToPane(redPane, "#fb4934");
+            board.getWhiteKing().getSquare().getPane().getChildren().add(board.getWhiteKing().getSquare().getPane().getChildren().size() - 1, redPane);
+        }
+        if(((King) board.getBlackKing()).inCheck()) {
+            System.out.println("Black King in check");
+            Pane redPane = new Pane();
+            addPropertiesToPane(redPane, "#fb4934");
+            board.getBlackKing().getSquare().getPane().getChildren().add(board.getBlackKing().getSquare().getPane().getChildren().size() - 1, redPane);
         }
     }
     
