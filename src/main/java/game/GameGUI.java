@@ -152,14 +152,14 @@ public class GameGUI extends Application {
     }
     
     Image blackDot = new Image("https://raw.githubusercontent.com/kevinMEH/battlechess/main/src/main/java/game/black%20dot.png");
-    String blackDotId = "Black Dot";
+    String blackDotId = "BlackDot";
     private void addPropertiesToImageView(ImageView imageView) {
         imageView.setPreserveRatio(true);
         imageView.setSmooth(true);
         imageView.setCache(true);
     }
     
-    String greenPaneID = "Green Pane";
+    String greenPaneID = "GreenPane";
     private void addPropertiesToGreenPane(Pane greenPane) {
         greenPane.setBackground(new Background(new BackgroundFill(Color.web("#b8bb26"), CornerRadii.EMPTY, Insets.EMPTY)));
         greenPane.setPrefSize(100, 100);
@@ -194,12 +194,15 @@ public class GameGUI extends Application {
         if(currentSelectedPiece != null) {
             List<Square> moveSet = currentSelectedPiece.getPossibleMoves();
             for (Square move : moveSet) {
+                // FIXME: NOT REMOVING FOR SOME REASON.
                 if (move.hasPiece()) { // If square has piece remove green pane
                     // Removes based on ID
-                    move.getPane().getChildren().remove(move.getPane().lookup(greenPaneID));
+                    System.out.println("Removing Green Pane");
+                    move.getPane().getChildren().removeAll(move.getPane().lookupAll("#" + greenPaneID));
                 } else { // Else remove black dot
                     // Removes based on ID
-                    move.getPane().getChildren().remove(move.getPane().lookup(blackDotId));
+                    System.out.println("Removing Black Dot");
+                    move.getPane().getChildren().removeAll(move.getPane().lookupAll("#" + blackDotId));
                 }
             }
         }
