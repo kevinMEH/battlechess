@@ -232,13 +232,13 @@ public class GameGUI extends Application {
             }
         }
         // Checks if the king is in check, if yes puts a red square.
-        if(((King) board.getWhiteKing()).inCheck()) {
+        if(((King) board.getWhiteKing()).inCheck() && board.getPieces().contains(board.getWhiteKing())) {
             System.out.println("White King in check");
             Pane redPane = new Pane();
             addPropertiesToPane(redPane, "#fb4934");
             board.getWhiteKing().getSquare().getPane().getChildren().add(board.getWhiteKing().getSquare().getPane().getChildren().size() - 1, redPane);
         }
-        if(((King) board.getBlackKing()).inCheck()) {
+        if(((King) board.getBlackKing()).inCheck() && board.getPieces().contains(board.getBlackKing())) {
             System.out.println("Black King in check");
             Pane redPane = new Pane();
             addPropertiesToPane(redPane, "#fb4934");

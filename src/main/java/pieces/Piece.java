@@ -3,7 +3,10 @@ package pieces;
 import game.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +24,16 @@ public abstract class Piece { // A basic piece
         this.square = square;
         square.capture(this);
     }
+
+    // Music file to play sound
+    private static final String musicFile = "Move Sound.wav";
+    private static final Media sound = new Media(new File(musicFile).toURI().toString());
+    private static final AudioClip mediaPlayer = new AudioClip(sound.getSource());
     
     public void move(int x, int y) {
+        // Plays move sound.
+        mediaPlayer.play();
+        System.out.println("Played move sound.");
         Square targetSquare = board.getSquareAt(x, y);
         this.getSquare().removePiece();
         targetSquare.capture(this);
