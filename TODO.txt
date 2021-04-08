@@ -3,3 +3,4 @@ TODO:
     Add castling
     Add timer
     Add checkmates? (Pretty easy to do)
+    GUI GUI GUI GUI GUI GUI!!!!

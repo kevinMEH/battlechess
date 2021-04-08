@@ -4,9 +4,10 @@ import game.*;
 
 public class Queen extends Piece {
     
-    public Queen(Color color, Board board, Square square) {
-        super(color, board, square);
-        setAlias("QN");
+    public Queen(PieceColor pieceColor, Board board, Square square) {
+        super(pieceColor, board, square);
+        if(pieceColor == PieceColor.WHITE) setImage("https://raw.githubusercontent.com/kevinMEH/battlechess/gui/src/main/java/pieces/White%20Queen.png");
+        else setImage("https://raw.githubusercontent.com/kevinMEH/battlechess/gui/src/main/java/pieces/Black%20Queen.png");
     }
 
     @Override

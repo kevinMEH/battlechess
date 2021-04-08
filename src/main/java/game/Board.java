@@ -51,7 +51,6 @@ x   0   1   2   3   4
     y
  */
     private final List<Piece> pieces = new ArrayList<>();
-    private final List<Piece> deadPieces = new ArrayList<>();
     private Piece blackKing;
     private Piece whiteKing;
     
@@ -60,77 +59,77 @@ x   0   1   2   3   4
         King blackKing;
         switch(boardType) {
             case REGULAR:
-                whiteKing = new King(Color.WHITE, this, getSquareAt(4, 0));
+                whiteKing = new King(PieceColor.WHITE, this, getSquareAt(4, 0));
                 this.whiteKing = whiteKing;
-                blackKing = new King(Color.BLACK, this, getSquareAt(4, 7));
+                blackKing = new King(PieceColor.BLACK, this, getSquareAt(4, 7));
                 this.blackKing = blackKing;
                 
-                pieces.add(new Rook(Color.WHITE, this, getSquareAt(0, 0)));
-                pieces.add(new Knight(Color.WHITE, this, getSquareAt(1, 0)));
-                pieces.add(new Bishop(Color.WHITE, this, getSquareAt(2, 0)));
-                pieces.add(new Queen(Color.WHITE, this, getSquareAt(3, 0)));
+                pieces.add(new Rook(PieceColor.WHITE, this, getSquareAt(0, 0)));
+                pieces.add(new Knight(PieceColor.WHITE, this, getSquareAt(1, 0)));
+                pieces.add(new Bishop(PieceColor.WHITE, this, getSquareAt(2, 0)));
+                pieces.add(new Queen(PieceColor.WHITE, this, getSquareAt(3, 0)));
                 pieces.add(whiteKing);
-                pieces.add(new Bishop(Color.WHITE, this, getSquareAt(5, 0)));
-                pieces.add(new Knight(Color.WHITE, this, getSquareAt(6, 0)));
-                pieces.add(new Rook(Color.WHITE, this, getSquareAt(7, 0)));
+                pieces.add(new Bishop(PieceColor.WHITE, this, getSquareAt(5, 0)));
+                pieces.add(new Knight(PieceColor.WHITE, this, getSquareAt(6, 0)));
+                pieces.add(new Rook(PieceColor.WHITE, this, getSquareAt(7, 0)));
                 
-                pieces.add(new Pawn(Color.WHITE, this, getSquareAt(0, 1)));
-                pieces.add(new Pawn(Color.WHITE, this, getSquareAt(1, 1)));
-                pieces.add(new Pawn(Color.WHITE, this, getSquareAt(2, 1)));
-                pieces.add(new Pawn(Color.WHITE, this, getSquareAt(3, 1)));
-                pieces.add(new Pawn(Color.WHITE, this, getSquareAt(4, 1)));
-                pieces.add(new Pawn(Color.WHITE, this, getSquareAt(5, 1)));
-                pieces.add(new Pawn(Color.WHITE, this, getSquareAt(6, 1)));
-                pieces.add(new Pawn(Color.WHITE, this, getSquareAt(7, 1)));
+                pieces.add(new Pawn(PieceColor.WHITE, this, getSquareAt(0, 1)));
+                pieces.add(new Pawn(PieceColor.WHITE, this, getSquareAt(1, 1)));
+                pieces.add(new Pawn(PieceColor.WHITE, this, getSquareAt(2, 1)));
+                pieces.add(new Pawn(PieceColor.WHITE, this, getSquareAt(3, 1)));
+                pieces.add(new Pawn(PieceColor.WHITE, this, getSquareAt(4, 1)));
+                pieces.add(new Pawn(PieceColor.WHITE, this, getSquareAt(5, 1)));
+                pieces.add(new Pawn(PieceColor.WHITE, this, getSquareAt(6, 1)));
+                pieces.add(new Pawn(PieceColor.WHITE, this, getSquareAt(7, 1)));
 
-                pieces.add(new Rook(Color.BLACK, this, getSquareAt(0, 7)));
-                pieces.add(new Knight(Color.BLACK, this, getSquareAt(1, 7)));
-                pieces.add(new Bishop(Color.BLACK, this, getSquareAt(2, 7)));
-                pieces.add(new Queen(Color.BLACK, this, getSquareAt(3, 7)));
+                pieces.add(new Rook(PieceColor.BLACK, this, getSquareAt(0, 7)));
+                pieces.add(new Knight(PieceColor.BLACK, this, getSquareAt(1, 7)));
+                pieces.add(new Bishop(PieceColor.BLACK, this, getSquareAt(2, 7)));
+                pieces.add(new Queen(PieceColor.BLACK, this, getSquareAt(3, 7)));
                 pieces.add(blackKing);
-                pieces.add(new Bishop(Color.BLACK, this, getSquareAt(5, 7)));
-                pieces.add(new Knight(Color.BLACK, this, getSquareAt(6, 7)));
-                pieces.add(new Rook(Color.BLACK, this, getSquareAt(7, 7)));
+                pieces.add(new Bishop(PieceColor.BLACK, this, getSquareAt(5, 7)));
+                pieces.add(new Knight(PieceColor.BLACK, this, getSquareAt(6, 7)));
+                pieces.add(new Rook(PieceColor.BLACK, this, getSquareAt(7, 7)));
 
-                pieces.add(new Pawn(Color.BLACK, this, getSquareAt(0, 6)));
-                pieces.add(new Pawn(Color.BLACK, this, getSquareAt(1, 6)));
-                pieces.add(new Pawn(Color.BLACK, this, getSquareAt(2, 6)));
-                pieces.add(new Pawn(Color.BLACK, this, getSquareAt(3, 6)));
-                pieces.add(new Pawn(Color.BLACK, this, getSquareAt(4, 6)));
-                pieces.add(new Pawn(Color.BLACK, this, getSquareAt(5, 6)));
-                pieces.add(new Pawn(Color.BLACK, this, getSquareAt(6, 6)));
-                pieces.add(new Pawn(Color.BLACK, this, getSquareAt(7, 6)));
+                pieces.add(new Pawn(PieceColor.BLACK, this, getSquareAt(0, 6)));
+                pieces.add(new Pawn(PieceColor.BLACK, this, getSquareAt(1, 6)));
+                pieces.add(new Pawn(PieceColor.BLACK, this, getSquareAt(2, 6)));
+                pieces.add(new Pawn(PieceColor.BLACK, this, getSquareAt(3, 6)));
+                pieces.add(new Pawn(PieceColor.BLACK, this, getSquareAt(4, 6)));
+                pieces.add(new Pawn(PieceColor.BLACK, this, getSquareAt(5, 6)));
+                pieces.add(new Pawn(PieceColor.BLACK, this, getSquareAt(6, 6)));
+                pieces.add(new Pawn(PieceColor.BLACK, this, getSquareAt(7, 6)));
                 break;
                 
             case MINI:
-                whiteKing = new King(Color.WHITE, this, getSquareAt(2, 0));
+                whiteKing = new King(PieceColor.WHITE, this, getSquareAt(2, 0));
                 this.whiteKing = whiteKing;
-                blackKing = new King(Color.BLACK, this, getSquareAt(2, 5));
+                blackKing = new King(PieceColor.BLACK, this, getSquareAt(2, 5));
                 this.blackKing = blackKing;
                 
-                pieces.add(new Rook(Color.WHITE, this, getSquareAt(0, 0)));
-                pieces.add(new Queen(Color.WHITE, this, getSquareAt(1, 0)));
+                pieces.add(new Rook(PieceColor.WHITE, this, getSquareAt(0, 0)));
+                pieces.add(new Queen(PieceColor.WHITE, this, getSquareAt(1, 0)));
                 pieces.add(whiteKing);
-                pieces.add(new King(Color.WHITE, this, getSquareAt(3, 0)));
-                pieces.add(new Rook(Color.WHITE, this, getSquareAt(4, 0)));
+                pieces.add(new Knight(PieceColor.WHITE, this, getSquareAt(3, 0)));
+                pieces.add(new Rook(PieceColor.WHITE, this, getSquareAt(4, 0)));
                 
-                pieces.add(new Pawn(Color.WHITE, this, getSquareAt(0, 1)));
-                pieces.add(new Pawn(Color.WHITE, this, getSquareAt(1, 1)));
-                pieces.add(new Pawn(Color.WHITE, this, getSquareAt(2, 1)));
-                pieces.add(new Pawn(Color.WHITE, this, getSquareAt(3, 1)));
-                pieces.add(new Pawn(Color.WHITE, this, getSquareAt(4, 1)));
+                pieces.add(new Pawn(PieceColor.WHITE, this, getSquareAt(0, 1)));
+                pieces.add(new Pawn(PieceColor.WHITE, this, getSquareAt(1, 1)));
+                pieces.add(new Pawn(PieceColor.WHITE, this, getSquareAt(2, 1)));
+                pieces.add(new Pawn(PieceColor.WHITE, this, getSquareAt(3, 1)));
+                pieces.add(new Pawn(PieceColor.WHITE, this, getSquareAt(4, 1)));
 
-                pieces.add(new Rook(Color.BLACK, this, getSquareAt(0, 5)));
-                pieces.add(new Queen(Color.BLACK, this, getSquareAt(1, 5)));
+                pieces.add(new Rook(PieceColor.BLACK, this, getSquareAt(0, 5)));
+                pieces.add(new Queen(PieceColor.BLACK, this, getSquareAt(1, 5)));
                 pieces.add(blackKing);
-                pieces.add(new King(Color.BLACK, this, getSquareAt(3, 5)));
-                pieces.add(new Rook(Color.BLACK, this, getSquareAt(4, 5)));
+                pieces.add(new Knight(PieceColor.BLACK, this, getSquareAt(3, 5)));
+                pieces.add(new Rook(PieceColor.BLACK, this, getSquareAt(4, 5)));
 
-                pieces.add(new Pawn(Color.BLACK, this, getSquareAt(0, 4)));
-                pieces.add(new Pawn(Color.BLACK, this, getSquareAt(1, 4)));
-                pieces.add(new Pawn(Color.BLACK, this, getSquareAt(2, 4)));
-                pieces.add(new Pawn(Color.BLACK, this, getSquareAt(3, 4)));
-                pieces.add(new Pawn(Color.BLACK, this, getSquareAt(4, 4)));
+                pieces.add(new Pawn(PieceColor.BLACK, this, getSquareAt(0, 4)));
+                pieces.add(new Pawn(PieceColor.BLACK, this, getSquareAt(1, 4)));
+                pieces.add(new Pawn(PieceColor.BLACK, this, getSquareAt(2, 4)));
+                pieces.add(new Pawn(PieceColor.BLACK, this, getSquareAt(3, 4)));
+                pieces.add(new Pawn(PieceColor.BLACK, this, getSquareAt(4, 4)));
                 break;
         }
     }
@@ -145,10 +144,9 @@ x   0   1   2   3   4
     
     public void killPiece(Piece piece) {
         pieces.remove(piece);
-        deadPieces.add(piece);
     }
     
-    void calculateMoves() {
+    void updateMoves() {
         for(Piece piece : pieces) {
             piece.resetMoves();
             piece.updateAvailableMoves();
@@ -164,7 +162,8 @@ x   0   1   2   3   4
 
     public boolean inBounds(int x, int y) {
         if(x > getXSize() - 1 || x < 0) return false;
-        if(y > getYSize() - 1 || y < 0) return false;
-        return true;
+        return !(y > getYSize() - 1 || y < 0);
     }
+    
+    
 }

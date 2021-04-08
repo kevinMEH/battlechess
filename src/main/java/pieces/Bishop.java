@@ -4,9 +4,10 @@ import game.*;
 
 public class Bishop extends Piece {
     
-    public Bishop(Color color, Board board, Square square) {
-        super(color, board, square);
-        setAlias("BP");
+    public Bishop(PieceColor pieceColor, Board board, Square square) {
+        super(pieceColor, board, square);
+        if(pieceColor == PieceColor.WHITE) setImage("https://raw.githubusercontent.com/kevinMEH/battlechess/gui/src/main/java/pieces/White%20Bishop.png");
+        else setImage("https://raw.githubusercontent.com/kevinMEH/battlechess/gui/src/main/java/pieces/Black%20Bishop.png");
     }
     
     public void updateAvailableMoves() {

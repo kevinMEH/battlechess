@@ -4,9 +4,10 @@ import game.*;
 
 public class Rook extends Piece {
     
-    public Rook(Color color, Board board, Square square) {
-        super(color, board, square);
-        setAlias("RK");
+    public Rook(PieceColor pieceColor, Board board, Square square) {
+        super(pieceColor, board, square);
+        if(pieceColor == PieceColor.WHITE) setImage("https://raw.githubusercontent.com/kevinMEH/battlechess/gui/src/main/java/pieces/White%20Rook.png");
+        else setImage("https://raw.githubusercontent.com/kevinMEH/battlechess/gui/src/main/java/pieces/Black%20Rook.png");
     }
     
     public void updateAvailableMoves() {
