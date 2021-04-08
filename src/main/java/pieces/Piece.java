@@ -26,7 +26,7 @@ public abstract class Piece { // A basic piece
     }
 
     // Music file to play sound
-    private static final String musicFile = "Move Sound.wav";
+    private static final String musicFile = "assets/Move Sound.wav";
     private static final Media sound = new Media(new File(musicFile).toURI().toString());
     private static final AudioClip mediaPlayer = new AudioClip(sound.getSource());
     

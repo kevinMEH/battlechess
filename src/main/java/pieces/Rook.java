@@ -6,8 +6,8 @@ public class Rook extends Piece {
     
     public Rook(PieceColor pieceColor, Board board, Square square) {
         super(pieceColor, board, square);
-        if(pieceColor == PieceColor.WHITE) setImage("https://raw.githubusercontent.com/kevinMEH/battlechess/main/src/main/java/pieces/White%20Rook.png");
-        else setImage("https://raw.githubusercontent.com/kevinMEH/battlechess/main/src/main/java/pieces/Black%20Rook.png");
+        if(pieceColor == PieceColor.WHITE) setImage("file:assets/White Rook.png");
+        else setImage("file:assets/Black Rook.png");
     }
     
     public void updateAvailableMoves() {
