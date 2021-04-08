@@ -10,11 +10,9 @@ import java.util.List;
 public abstract class Piece { // A basic piece
     
     private final PieceColor pieceColor;
-    private boolean killed = false;
     private Square square;
     final Board board;
     private final List<Square> possibleMoves = new ArrayList<>();
-    private String alias;
     private ImageView imageView;
     
     public Piece(PieceColor pieceColor, Board board, Square square) {
@@ -29,14 +27,6 @@ public abstract class Piece { // A basic piece
         this.getSquare().removePiece();
         targetSquare.capture(this);
         this.setSquare(targetSquare);
-    }
-    
-    public void move(Integer[] coordinates) {
-        if(coordinates.length > 2) {
-            System.out.println("Coordinates in incorrect format! Operation aborted. move(Integer[] coordinates)");
-            return;
-        }
-        move(coordinates[0], coordinates[1]);
     }
 
     boolean validMove(int x, int y) {
@@ -53,15 +43,9 @@ public abstract class Piece { // A basic piece
     
     public PieceColor getColor() { return pieceColor; }
     
-    public void kill() { 
-        this.killed = true; 
+    public void kill() {
         board.killPiece(this);
     }
-    
-    public boolean isKilled() { return killed; }
-    
-    public String getAlias() {return alias;}
-    void setAlias(String alias) { this.alias = alias; }
     
     public ImageView getImageView() { return imageView; }
     void setImage(String path) {

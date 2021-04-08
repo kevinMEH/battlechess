@@ -51,7 +51,6 @@ x   0   1   2   3   4
     y
  */
     private final List<Piece> pieces = new ArrayList<>();
-    private final List<Piece> deadPieces = new ArrayList<>();
     private Piece blackKing;
     private Piece whiteKing;
     
@@ -145,7 +144,6 @@ x   0   1   2   3   4
     
     public void killPiece(Piece piece) {
         pieces.remove(piece);
-        deadPieces.add(piece);
     }
     
     void updateMoves() {
@@ -164,8 +162,7 @@ x   0   1   2   3   4
 
     public boolean inBounds(int x, int y) {
         if(x > getXSize() - 1 || x < 0) return false;
-        if(y > getYSize() - 1 || y < 0) return false;
-        return true;
+        return !(y > getYSize() - 1 || y < 0);
     }
     
     

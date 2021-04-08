@@ -14,8 +14,6 @@ import javafx.stage.Stage;
 import javafx.scene.paint.Color;
 import pieces.Piece;
 
-import java.io.IOException;
-
 public class GameGUI extends Application {
     
     public static void commence() {
@@ -23,9 +21,7 @@ public class GameGUI extends Application {
     }
     
     @Override
-    public void start(Stage primaryStage) throws IOException {
-        
-//        Parent root = FXMLLoader.load(getClass().getResource("/Gui.fxml"));
+    public void start(Stage primaryStage) {
         
         VBox root = new VBox();
 

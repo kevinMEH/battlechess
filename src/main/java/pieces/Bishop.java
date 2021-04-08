@@ -6,7 +6,6 @@ public class Bishop extends Piece {
     
     public Bishop(PieceColor pieceColor, Board board, Square square) {
         super(pieceColor, board, square);
-        setAlias("BP");
         if(pieceColor == PieceColor.WHITE) setImage("https://raw.githubusercontent.com/kevinMEH/battlechess/gui/src/main/java/pieces/White%20Bishop.png");
         else setImage("https://raw.githubusercontent.com/kevinMEH/battlechess/gui/src/main/java/pieces/Black%20Bishop.png");
     }
