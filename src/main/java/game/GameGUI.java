@@ -152,7 +152,7 @@ public class GameGUI extends Application {
         
     }
     
-    Image blackDot = new Image("https://raw.githubusercontent.com/kevinMEH/battlechess/main/src/main/java/game/black%20dot.png");
+    Image blackDot = new Image("file:assets/Black Dot.png");
     String blackDotId = "BlackDot";
     private void addPropertiesToImageView(ImageView imageView) {
         imageView.setPreserveRatio(true);
