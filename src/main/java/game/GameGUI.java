@@ -194,7 +194,6 @@ public class GameGUI extends Application {
         if(currentSelectedPiece != null) {
             List<Square> moveSet = currentSelectedPiece.getPossibleMoves();
             for (Square move : moveSet) {
-                // FIXME: NOT REMOVING FOR SOME REASON.
                 if (move.hasPiece()) { // If square has piece remove green pane
                     // Removes based on ID
                     System.out.println("Removing Green Pane");
