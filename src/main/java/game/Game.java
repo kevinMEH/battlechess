@@ -14,7 +14,7 @@ public class Game {
                 board = new Board(8, 8, boardType);
                 break;
             case MINI:
-                board = new Board(5, 6, boardType);
+                board = new Board(6, 6, boardType);
                 break;
         }
     }
