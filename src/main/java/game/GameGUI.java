@@ -11,6 +11,7 @@ import javafx.scene.control.Control;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.paint.Color;
 import pieces.Piece;
@@ -27,7 +28,14 @@ public class GameGUI extends Application {
     @Override
     public void start(Stage primaryStage) {
         
-        VBox root = new VBox();
+        BorderPane root = new BorderPane();
+        final Scene menuScene = new Scene(root, 1200, 800);
+        menuScene.getStylesheets().add("file:assets/Button.css");
+        primaryStage.setTitle("battlechess");
+        
+        Image logo = new Image("file:assets/Battle Chess Logo.png");
+        ImageView logoImage = new ImageView(logo);
+        addPropertiesToImageView(logoImage);
 
         Button regular = new Button("Regular Chess");
         regular.setOnAction(actionEvent -> {
@@ -41,10 +49,19 @@ public class GameGUI extends Application {
             game = new Game(Board.BoardType.MINI);
             playGame(primaryStage);
         });
+        
+        regular.getStyleClass().add("mainMenuButton");
+        mini.getStyleClass().add("mainMenuButton");
+        
+        HBox hBox = new HBox(30); // 30 Pixels spacing between elements
+        hBox.getChildren().addAll(regular, mini);
+        hBox.setAlignment(Pos.TOP_CENTER);
+        hBox.setPadding(new Insets(0, 0, 200, 0));
 
-        root.getChildren().addAll(regular, mini);
-        final Scene menuScene = new Scene(root, 1200, 800);
-        primaryStage.setTitle("battlechess");
+        root.setCenter(logoImage);
+        root.setBottom(hBox);
+        root.setBackground(new Background(new BackgroundFill(Color.web("fbf1c7"), CornerRadii.EMPTY, Insets.EMPTY)));
+        
         primaryStage.setScene(menuScene);
         primaryStage.show();
     }

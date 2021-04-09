@@ -1,0 +1,8 @@
+.mainMenuButton {
+    -fx-padding: 25, 40, 25, 40;
+    -fx-background-color: #8ec07c;
+    -fx-background-radius: 10;
+    -fx-background-insets: 0, 0, 0, 0;
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+}
