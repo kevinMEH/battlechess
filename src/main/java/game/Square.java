@@ -39,6 +39,4 @@ public class Square {
     public Pane getPane() { return pane; }
     public void setPane(Pane pane) { this.pane = pane; }
     
-    
-    
 }
