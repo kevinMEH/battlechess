@@ -10,6 +10,8 @@ The GUI includes features like highlighting all possible moves, detecting checks
 
 All sprites, pictures, including the logo, and sounds are made from scratch.
 
+Won 2nd best project in the class for MP3. 🎉
+
 ## How To Play
 
 ### Pawns
