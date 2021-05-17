@@ -14,12 +14,12 @@ public class Knight extends Piece {
         int x = this.getSquare().getX();
         int y = this.getSquare().getY();
         /*
-        5       X       X
-        4   X               X
-        3           K
-        2   X               X
-        1       X       X
-    x   0   1   2   3   4   5
+        2       X       X
+        1   X               X
+        0           K
+       -1   X               X
+       -2       X       X
+    x      -2  -1   0   1   2
         y
          */
         // Top Left Top
